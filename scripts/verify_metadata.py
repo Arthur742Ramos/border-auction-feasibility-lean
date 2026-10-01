@@ -12,7 +12,7 @@ from scripts.submission_contract import load_formalization_metadata
 metadata = load_formalization_metadata(ROOT / "formalization.yaml")
 authors = ["Arthur Freitas Ramos", "David Barros Hulak", "Ruy Jose Guerra Barretto de Queiroz"]
 assert metadata["project"]["authors"] == authors
-assert metadata["project"]["responsible_maintainers"] == [authors[0]]
+assert metadata["project"]["responsible_maintainers"] == authors
 assert metadata["project"]["license"] == "BSD-3-Clause"
 cfg = json.loads((ROOT / "comparator.json").read_text())
 assert [s["lean"] for s in metadata["alignment"]["statements"]] == cfg["theorem_names"]

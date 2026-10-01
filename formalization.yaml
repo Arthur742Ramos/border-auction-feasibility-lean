@@ -20,6 +20,8 @@ project:
     - "Ruy Jose Guerra Barretto de Queiroz"
   responsible_maintainers:
     - "Arthur Freitas Ramos"
+    - "David Barros Hulak"
+    - "Ruy Jose Guerra Barretto de Queiroz"
   license: "BSD-3-Clause"
 repository:
   role: "substantive-development"
@@ -60,7 +62,7 @@ review:
     No payment, incentive compatibility, deterministic-allocation, infinite-type,
     symmetric-auction or full-paper formalization claim. The generated Challenge
     mirrors the library under different helper names, rather than supplying a
-    mathematically independent second proof. No Palomar submission is requested.
+    mathematically independent second proof.
 alignment:
   statements:
     - lean: "Border.border_feasibility"
