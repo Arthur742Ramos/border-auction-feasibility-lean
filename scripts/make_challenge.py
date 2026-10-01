@@ -1,39 +1,56 @@
-"""Generate a self-contained, fully proved Mathlib-only comparison module.
+"""Generate genuine definitions and exact selected theorem statements.
 
-No proof holes are introduced. The comparison module duplicates the proof
-with a distinct helper namespace; it is not an independent second proof.
+Only the six comparator-selected Challenge theorem proofs are deliberate holes.
+Complete proofs remain in the unchanged Border library imported by Solution.
 """
+import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-ORDER = ("Auction", "WeightedHall", "Flow", "Theorem", "Support", "Independent")
+STATEMENT_MODULES = {
+    "border_feasibility": "Theorem",
+    "feasible_iff_conditional": "Support",
+    "border_conditional_feasibility": "Support",
+    "independent_border_feasibility": "Independent",
+    "independent_border_conditional_feasibility": "Independent",
+    "allocation_le_one": "Support",
+}
+
+
 def render():
-    imports = []
-    bodies = []
-    for name in ORDER:
-        lines = (ROOT / "Border" / f"{name}.lean").read_text().splitlines()
-        retained = []
-        for line in lines:
-            if line == "module":
-                continue
-            if line.startswith("public import "):
-                if "Mathlib." in line and line not in imports:
-                    imports.append(line)
-                continue
-            retained.append(line)
-        body = "\n".join(retained).strip()
-        body = body.replace("Border.Implementation", "Border.ChallengeProof")
-        body = body.replace("Implementation.", "ChallengeProof.")
-        bodies.append(f"/- Source: Border/{name}.lean; helpers renamed for comparison. -/\nsection\n{body}\nend")
-    header = """/-!
-    Self-contained comparison surface for Border's finite auction feasibility theorem.
-    All definitions and all six selected theorems are fully proved in this module.
-    Only pinned Mathlib is imported. The helper proofs below mirror the library,
-    under a different namespace; they do not constitute independent proof discovery.
-    -/
-    """
-    header = header.replace("\n    ", "\n")
-    return "module\n" + "\n".join(imports) + "\n\n" + header + "\n\n".join(bodies) + "\n"
+    config = json.loads((ROOT / "comparator.json").read_text())
+    auction = (ROOT / "Border/Auction.lean").read_text()
+    # Keep definition source bytes, except its closing namespace terminator.
+    assert auction.endswith("end Border\n")
+    definitions = auction.removesuffix("end Border\n")
+    module_doc = """/-!
+Compact comparison surface for Border's finite auction feasibility theorem.
+All ten definitions below are genuine, with their exact library bodies.
+Only the six comparator-selected theorem proofs are deliberate statement holes.
+The complete, independently reviewed proofs are in Border, imported by Solution.
+The official comparator checks their exact contracts; dependency auditing and
+three-kernel passes check the complete Solution rather than these placeholders.
+-/
+"""
+    # Lean requires imports before module documentation.
+    insertion = definitions.index("\n@[expose]")
+    definitions = definitions[:insertion] + "\n" + module_doc + definitions[insertion:]
+    statements = []
+    for qualified in config["theorem_names"]:
+        name = qualified.removeprefix("Border.")
+        module = STATEMENT_MODULES[name]
+        source = (ROOT / "Border" / f"{module}.lean").read_text()
+        matches = re.findall(r"(?m)^theorem " + re.escape(name) + r"\b[\s\S]*?:=", source)
+        assert len(matches) == 1, qualified
+        statement = matches[0]
+        if name == "allocation_le_one":
+            statement = "omit [∀ i, Fintype (T i)] in\n" + statement
+        statements.append(
+            f"/- Statement copied from Border/{module}.lean; complete proof in Solution. -/\n"
+            + statement + " by\n  sorry\n"
+        )
+    return definitions + "\n" + "\n".join(statements) + "\nend Border\n"
 
 if __name__ == "__main__":
     (ROOT / "Challenge.lean").write_text(render())

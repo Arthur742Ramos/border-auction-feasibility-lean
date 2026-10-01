@@ -8,7 +8,7 @@
     "Border/Theorem.lean": "853cb97a2b2648a2c7ed3c16e6dbad9b1739a4351011c9d3307a2e9ac1278658",
     "Border/WeightedHall.lean": "4c06decf63448537c4d09fc6da57ccd3e764c5384f438d66754218d647c0a8c5",
     "Border.lean": "dbbfab087a3372f1e1ce10e4fcfbd176e5a8dad5d166c00a57af4e2a6da65a99",
-    "Challenge.lean": "d130b731e672c15c08a77ac74273c86a2d174191e9c1f5f62ea420d8dd8b12f1",
+    "Challenge.lean": "4bd5c15c4a78f9206844982e0153641c48c4d84a1e3de07dbeee8bf96f6a48e2",
     "ContractAudit.lean": "fa6bbdb9b238185cfdcd256c80cb39ddab50f3c1f6d37d161d89c36e1d200b23",
     "Solution.lean": "ba50840699ef7edeea9426cbee343fe30e10a6e1f54da77cf80d4901d6abd40c",
     "comparator.json": "36a2c4c26760b19b488e623c2cecea19b096fbefc4d4f6d209d13ea68df339f2",
@@ -18,12 +18,12 @@
   },
   "lean": "leanprover/lean4:v4.35.0-rc2",
   "mathlib": "065356127b1dc0016f66b7283ce0ce2c4055aa55",
-  "comparison": "six theorems and ten genuine definitions; fully proved Challenge",
+  "comparison": "six exact theorem statements with named Challenge holes; ten genuine unchanged definitions; complete Solution proofs",
   "verification_kernels": [
     "Lean default",
     "nanoda",
     "con-ron"
   ],
-  "recorded_at_utc": "2026-10-01T19:16:56.700093+00:00",
+  "recorded_at_utc": "2026-10-01T21:05:53.167701+00:00",
   "local_platform": "macOS arm64; Comparator without Linux bubblewrap"
 }

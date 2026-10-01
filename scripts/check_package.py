@@ -1,4 +1,4 @@
-"""Fail closed on statement drift, placeholders, unexpected axioms and metadata."""
+"""Fail closed on contract drift and holes outside named Challenge statements."""
 import hashlib
 import json
 import re
@@ -18,13 +18,20 @@ assert len(original) <= 100 * 1024 and len(original.splitlines()) <= 1000
 for file in [*ROOT.glob("*.lean"), *ROOT.glob("Border/*.lean")]:
     content = file.read_text()
     assert content.startswith("module\n"), file
-    assert not re.search(r"\b(sorry|sorryAx|admit|axiom|unsafe|native_decide|ofReduceBool)\b", content), file
+    if file.name == "Challenge.lean" and file.parent == ROOT:
+        # Generation equality above restricts placeholders to precisely the
+        # six official comparator-selected Challenge theorem proof bodies.
+        assert len(re.findall(r"(?m)^  sorry$", content)) == len(cfg["theorem_names"]) == 6
+        checked_content = re.sub(r"(?m)^  sorry$", "", content)
+    else:
+        checked_content = content
+    assert not re.search(r"\b(sorry|sorryAx|admit|axiom|unsafe|native_decide|ofReduceBool)\b", checked_content), file
     assert len(content.splitlines()) <= 10000, file
 for name in cfg["definition_names"]:
     assert re.search(r"\bdef\s+" + re.escape(name.removeprefix("Border.")) + r"\b", original.decode()), name
 assert all(re.search(r"\btheorem\s+" + re.escape(n.removeprefix("Border.")) + r"\b", original.decode())
            for n in cfg["theorem_names"])
-print(f"Package shape: PASS; Challenge {len(original.splitlines())} lines, {len(original)} bytes; no proof holes")
+print(f"Package shape: PASS; Challenge {len(original.splitlines())} lines, {len(original)} bytes; six named statement holes; complete library/Solution")
 
 axioms = ROOT / "evidence/final-axioms.log"
 if axioms.exists():
@@ -42,7 +49,7 @@ record = {
     "source_files_sha256": hashes,
     "lean": (ROOT / "lean-toolchain").read_text().strip(),
     "mathlib": "065356127b1dc0016f66b7283ce0ce2c4055aa55",
-    "comparison": "six theorems and ten genuine definitions; fully proved Challenge",
+    "comparison": "six exact theorem statements with named Challenge holes; ten genuine unchanged definitions; complete Solution proofs",
     "verification_kernels": ["Lean default", "nanoda", "con-ron"],
 }
 manifest = ROOT / "evidence/verification-manifest.json"

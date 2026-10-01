@@ -56,14 +56,24 @@ lemma bounds nonnegative demand by that value using the cut inequalities,
 contradicting separation. This is a complete proof for real probabilities,
 without assuming a flow theorem or restricting probabilities to rationals.
 
-`Challenge.lean` is a self-contained Mathlib-only comparison module, with all
-six selected theorems and ten definitions. It has **complete proofs**, no
-statement holes, and a separate `Border.ChallengeProof` helper namespace.
-`Solution.lean` imports the modular library, whose helpers use
-`Border.Implementation`. The Challenge mirrors the library proof; it is not
-claimed to be an independently discovered second proof. Generate it with
-`python3 scripts/make_challenge.py` after editing the library. The package
-checker verifies that the committed Challenge matches that generation.
+`Challenge.lean` is a compact, self-contained Mathlib-only comparison contract.
+Its ten genuine definitions retain their exact library bodies. The six selected
+theorems retain their full statements, with deliberate `sorry` placeholders only
+in these named Challenge theorem proofs, as permitted by the official comparison
+policy. **All complete proofs remain in the library and `Solution.lean`**, with
+no placeholders or extra axioms. The comparator checks the Challenge statements
+against Solution; axiom auditing and all three kernels validate Solution proofs.
+The implementation helpers remain in the distinct `Border.Implementation`
+namespace; Challenge imports no project-local proof module.
+
+Generate the contract with `python3 scripts/make_challenge.py` after editing the
+library. The generator copies definitions and selected theorem headers directly
+from the library, and the package checker restricts placeholders to those six
+named Challenge statements. A compact contract avoids emitting the full helper
+proofs and their repeated proof-state panels in the rendered statement page.
+See `evidence/compact-challenge.md` for the reproduced size failure and the
+validated replacement. The full mathematical scope and proof implementation
+are unchanged.
 
 ## Build and verification
 
@@ -94,6 +104,8 @@ without its Linux sandbox; hosted Linux CI uses bubblewrap.
 
 Verification evidence and its precise source hashes are in `evidence/`.
 GitHub Actions independently builds and compares the pushed source on Linux.
+It also runs the pinned accepted-Challenge renderer and sanitizer under bubblewrap
+and preserves the rendered size, source hashes, and bounded render artifact.
 These are proof and package checks, not a Palomar submission or registration.
 
 ## Provenance

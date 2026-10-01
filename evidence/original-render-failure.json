@@ -1,0 +1,44 @@
+{
+  "bwrap_source_tag": "v0.12.0",
+  "diagnostics": [
+    {
+      "code": "palomar.render_failed",
+      "explanation": "Palomar could not render the accepted Challenge.\n\nVerificationError: /opt/hostedtoolcache/Python/3.11.10/x64/bin/python3.11 /home/runner/work/PalomarSubmission/PalomarSubmission/pipeline/scripts/render_challenge.py sanitize failed (2): render challenge: render output file exceeds the per-file cap: Challenge/index.html",
+      "next_action": "Do not change the repository. Retry the same commit later and report the render workflow URL if this happens again.",
+      "owner": "palomar",
+      "repairable": false,
+      "retryable": true,
+      "stage": "sanitize",
+      "summary": "Palomar could not render the accepted Challenge."
+    }
+  ],
+  "diagnostics_schema_version": 1,
+  "errors": [
+    "/opt/hostedtoolcache/Python/3.11.10/x64/bin/python3.11 /home/runner/work/PalomarSubmission/PalomarSubmission/pipeline/scripts/render_challenge.py sanitize failed (2): render challenge: render output file exceeds the per-file cap: Challenge/index.html"
+  ],
+  "lean_toolchain": "leanprover/lean4:v4.35.0-rc2",
+  "mathlib_cache": {
+    "bytes": 448908886,
+    "downloaded": 8915,
+    "requested": 8915
+  },
+  "prepared_at": "2026-10-01T19:54:38Z",
+  "renderer_commit": "65f0154ed776cd26c224254aa57b379137f28b0d",
+  "schema_version": 3,
+  "source": {
+    "challenge_path": "Challenge.lean",
+    "challenge_sha256": "d130b731e672c15c08a77ac74273c86a2d174191e9c1f5f62ea420d8dd8b12f1",
+    "commit": "7b2dc5c257f3fb66113ac85c7f77e66f7c1edf6c",
+    "comparator_config_path": "comparator.json",
+    "lakefile_path": "lakefile.toml",
+    "lean_toolchain_path": "lean-toolchain",
+    "project_path": "",
+    "repository": "Arthur742Ramos/border-auction-feasibility-lean",
+    "repository_url": "https://github.com/Arthur742Ramos/border-auction-feasibility-lean",
+    "solution_path": "Solution.lean"
+  },
+  "stage": "sanitize",
+  "status": "error",
+  "verso_commit": "9f8096e40b31715b1d8d5997f15a0bd832f7e37d",
+  "workflow_url": "https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/36917617742"
+}

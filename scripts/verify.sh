@@ -12,6 +12,7 @@ lake build Challenge > evidence/challenge-build.log 2>&1
 lake build Solution > evidence/solution-build.log 2>&1
 lake build > evidence/full-build.log 2>&1
 lake env lean Audit.lean > evidence/final-axioms.log 2>&1
+python3 scripts/check_challenge_axioms.py
 lake env lean ContractAudit.lean > evidence/contract-binders.log 2>&1
 lake env lean --src-deps Challenge.lean > evidence/challenge-source-deps.log 2>&1
 python3 - <<'PY'

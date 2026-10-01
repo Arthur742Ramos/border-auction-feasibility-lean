@@ -1,0 +1,165 @@
+{
+  "raw_html_bytes": 12934233,
+  "raw_html_sha256": "7ad7569470cc1f72379ecfbb2f8f6b31adba125fd6f8f9d5a8bf4519d8e3538b",
+  "per_file_cap_bytes": 8388608,
+  "excess_bytes": 4545625,
+  "expansion_over_lean_bytes": 458.4819042217575,
+  "tactic_state_panels": 571,
+  "tactic_state_markup_bytes": 11873191,
+  "tactic_state_fraction_of_html": 0.9179663765141698,
+  "pure_static_transform_bytes": 12935404,
+  "pure_transform_scope": "Diagnostic measurement only; official bundle pipeline stops at unchanged raw-size cap before this transformation.",
+  "actual_sanitizer_result": "VerificationError: render output file exceeds the per-file cap: Challenge/index.html",
+  "class_counts": [
+    [
+      "token",
+      112574
+    ],
+    [
+      "inter-text",
+      82651
+    ],
+    [
+      "var",
+      54363
+    ],
+    [
+      "unknown",
+      35449
+    ],
+    [
+      "const",
+      16880
+    ],
+    [
+      "type",
+      9985
+    ],
+    [
+      "hypothesis",
+      9430
+    ],
+    [
+      "name",
+      9430
+    ],
+    [
+      "colon",
+      9430
+    ],
+    [
+      "punctuation",
+      1986
+    ],
+    [
+      "keyword",
+      1480
+    ],
+    [
+      "sort",
+      1440
+    ],
+    [
+      "bracket",
+      1122
+    ],
+    [
+      "built-in",
+      743
+    ],
+    [
+      "delim",
+      743
+    ],
+    [
+      "tactic",
+      571
+    ],
+    [
+      "tactic-toggle",
+      571
+    ],
+    [
+      "tactic-state",
+      571
+    ],
+    [
+      "goal",
+      555
+    ],
+    [
+      "hypotheses",
+      555
+    ],
+    [
+      "conclusion",
+      555
+    ],
+    [
+      "prefix",
+      555
+    ],
+    [
+      "operator",
+      475
+    ],
+    [
+      "separator",
+      389
+    ],
+    [
+      "labeled-case",
+      319
+    ]
+  ],
+  "tag_counts": [
+    [
+      "span",
+      237539
+    ],
+    [
+      "a",
+      996
+    ],
+    [
+      "input",
+      891
+    ],
+    [
+      "label",
+      891
+    ],
+    [
+      "code",
+      107
+    ],
+    [
+      "div",
+      17
+    ],
+    [
+      "p",
+      13
+    ],
+    [
+      "script",
+      9
+    ],
+    [
+      "link",
+      8
+    ],
+    [
+      "meta",
+      2
+    ],
+    [
+      "html",
+      1
+    ],
+    [
+      "head",
+      1
+    ]
+  ]
+}

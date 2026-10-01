@@ -1,0 +1,25 @@
+{
+  "challenge_sha256": "4bd5c15c4a78f9206844982e0153641c48c4d84a1e3de07dbeee8bf96f6a48e2",
+  "challenge_bytes": 4539,
+  "challenge_lines": 101,
+  "source_base_commit": "7b2dc5c257f3fb66113ac85c7f77e66f7c1edf6c",
+  "renderer_commit": "65f0154ed776cd26c224254aa57b379137f28b0d",
+  "verso_commit": "9f8096e40b31715b1d8d5997f15a0bd832f7e37d",
+  "lean_toolchain": "leanprover/lean4:v4.35.0-rc2",
+  "raw_html_bytes": 233211,
+  "sanitized_html_bytes": 231491,
+  "per_file_cap_bytes": 8388608,
+  "headroom_bytes": 8157117,
+  "sanitized_html_sha256": "7c6cdad90040a84731acc19dbe029ec8f3f398e42fa293fdc2265b1e30158a18",
+  "artifact_tree_sha256": "34fd8b14f7086ce0d254ca93bf9efa1be664093532c142ba7f208332e3be3d5d",
+  "sanitizer_exit": 0,
+  "official_core_notation_audited_declarations": 16,
+  "selected_declaration_anchors": 16,
+  "local_runtime": {
+    "os": "macOS-27.2-arm64-arm-64bit-Mach-O",
+    "python": "3.14.7",
+    "sandbox": "macOS direct official renderer commands; no Linux bubblewrap"
+  },
+  "complete_library_unchanged": true,
+  "submission_actions": "none"
+}

@@ -7,3 +7,9 @@ evidence/*
 !evidence/final-comparator.log
 !evidence/independent-review.md
 !evidence/source-correspondence.md
+!evidence/independent-review-original.md
+!evidence/compact-challenge.md
+!evidence/challenge-reference-axioms.log
+!evidence/original-render-failure.json
+!evidence/original-render-measurements.json
+!evidence/compact-render-measurements.json

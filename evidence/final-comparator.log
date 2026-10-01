@@ -1,18 +1,17 @@
 WARNING: Sandbox disabled, this run is not trustworthy.
 Resolving dependencies
 Building Challenge
-⚠ [3124/3125] Replayed Challenge
-warning: Challenge.lean:212:0: automatically included section variable(s) unused in theorem `Border.ChallengeProof.flowSet_compact`:
-  [Fintype Ω]
-  [DecidableEq A]
-consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
-  omit [Fintype Ω] [DecidableEq A] in theorem ...
-
-Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
-Build completed successfully (3125 jobs).
+⚠ [912/913] Replayed Challenge
+warning: Challenge.lean:65:8: declaration uses `sorry`
+warning: Challenge.lean:71:8: declaration uses `sorry`
+warning: Challenge.lean:76:8: declaration uses `sorry`
+warning: Challenge.lean:82:8: declaration uses `sorry`
+warning: Challenge.lean:89:8: declaration uses `sorry`
+warning: Challenge.lean:97:8: declaration uses `sorry`
+Build completed successfully (913 jobs).
 Exporting #[Quot, Quot.mk, Quot.lift, Quot.ind, Border.border_feasibility, Border.feasible_iff_conditional, Border.border_conditional_feasibility, Border.independent_border_feasibility, Border.independent_border_conditional_feasibility, Border.allocation_le_one, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce, Nat, String, String.mk, Char, optParam, autoParam, semiOutParam, outParam, Border.IsPrior, Border.marginal, Border.interimMass, Border.IsAllocation, Border.Feasible, Border.ConditionallyFeasible, Border.hitMass, Border.BorderCondition, Border.productPrior, Border.IndependentBorderCondition] from Challenge
 Building Solution
-⚠ [3126/3132] Replayed Border.Flow
+⚠ [3125/3132] Replayed Border.Flow
 warning: Border/Flow.lean:39:0: automatically included section variable(s) unused in theorem `Border.Implementation.flowSet_compact`:
   [Fintype Ω]
   [DecidableEq A]

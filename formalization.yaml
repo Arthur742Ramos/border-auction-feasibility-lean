@@ -61,8 +61,12 @@ review:
     Single-item allocation feasibility with withholding and finite type spaces.
     No payment, incentive compatibility, deterministic-allocation, infinite-type,
     symmetric-auction or full-paper formalization claim. The generated Challenge
-    mirrors the library under different helper names, rather than supplying a
-    mathematically independent second proof.
+    contains ten genuine unchanged definitions and six exact theorem statements
+    with deliberate placeholders only in these comparator-selected Challenge
+    proof bodies. Complete proofs remain in the library and Solution without
+    placeholders or extra axioms. Comparator contract checks, Solution axiom
+    auditing, and three-kernel replay establish the proved statements; Challenge
+    is a compact statement contract rather than a second proof.
 alignment:
   statements:
     - lean: "Border.border_feasibility"
