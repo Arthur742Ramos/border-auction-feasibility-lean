@@ -1,0 +1,102 @@
+name: Lean and three-kernel proof verification
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: border-verify-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      LEAN_NUM_THREADS: "2"
+      MATHLIB_NO_CACHE_ON_UPDATE: "1"
+      PALOMAR_SUBMISSION_DIR: ${{ github.workspace }}/palomar-validator
+    defaults:
+      run:
+        working-directory: project
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          path: project
+          persist-credentials: false
+      - name: Checkout official verification policy
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: PalomarRegistry/PalomarSubmission
+          ref: 65f0154ed776cd26c224254aa57b379137f28b0d
+          path: palomar-validator
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.11.10"
+      - name: Install checked Lean release and verifier prerequisites
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y meson ninja-build libcap-dev pkg-config zstd
+          python3 -m pip install --require-hashes --no-deps -r "$PALOMAR_SUBMISSION_DIR/requirements.txt"
+          echo "COMPARATOR_BWRAP=$("$PALOMAR_SUBMISSION_DIR/scripts/install_bwrap.sh" "$RUNNER_TEMP/bwrap-bin")" >> "$GITHUB_ENV"
+          curl --fail --location --retry 2 \
+            https://github.com/leanprover/lean4/releases/download/v4.35.0-rc2/lean-4.35.0-rc2-linux.tar.zst \
+            -o "$RUNNER_TEMP/lean.tar.zst"
+          printf '%s  %s\n' b67d0e0ba959fc74e186f1b44aebca32d6ecb6a28f8e9a029fc4e9f73398a049 "$RUNNER_TEMP/lean.tar.zst" | sha256sum --check
+          tar --zstd -xf "$RUNNER_TEMP/lean.tar.zst" -C "$RUNNER_TEMP"
+          echo "$RUNNER_TEMP/lean-4.35.0-rc2-linux/bin" >> "$GITHUB_PATH"
+      - name: Verify audited source hashes
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, json
+          saved = json.loads(Path('evidence/verification-manifest.json').read_text())
+          for name, expected in saved['source_files_sha256'].items():
+              assert hashlib.sha256(Path(name).read_bytes()).hexdigest() == expected, name
+          print('Audited source hashes match')
+          PY
+      - name: Retrieve required dependency caches
+        run: |
+          lake update
+          lake exe cache get Mathlib.Analysis.LocallyConvex.Separation \
+            Mathlib.Analysis.Normed.Module.FiniteDimension Mathlib.Tactic \
+            Mathlib.Data.Fintype.Pi Mathlib.Algebra.Order.BigOperators.Group.Finset \
+            Mathlib.Basic.Real.Basic
+      - name: Compile and replay under Linux bubblewrap
+        run: ./scripts/verify.sh
+      - name: Record exact hosted evidence
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          saved = json.loads(Path('evidence/verification-manifest.json').read_text())
+          for name, expected in saved['source_files_sha256'].items():
+              assert hashlib.sha256(Path(name).read_bytes()).hexdigest() == expected, name
+          log = Path('evidence/final-comparator.log').read_text()
+          assert 'Your solution is okay!' in log
+          assert 'Sandbox disabled' not in log
+          result = {
+              'commit': os.environ['GITHUB_SHA'],
+              'run_id': os.environ['GITHUB_RUN_ID'],
+              'sandbox': 'Linux bubblewrap',
+              'kernels': ['Lean default', 'nanoda', 'con-ron'],
+              'source_files_sha256': saved['source_files_sha256'],
+              'scope': 'Proof and package verification; no Palomar submission',
+          }
+          Path('evidence/hosted-run.json').write_text(json.dumps(result, indent=2) + '\n')
+          PY
+      - name: Preserve verification logs
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: proof-verification-${{ github.sha }}
+          path: project/evidence/
+          if-no-files-found: error
+          retention-days: 30

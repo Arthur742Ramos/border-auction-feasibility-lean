@@ -1,0 +1,77 @@
+version: "v0.4"
+project:
+  name: "Border's Finite Auction Feasibility Theorem"
+  description: >-
+    For arbitrary finite bidders with heterogeneous finite type spaces,
+    a nonnegative normalized real joint prior, and an interim allocation
+    rule with values in [0,1], a randomized allocation of at most one item
+    realizes the weighted interim masses if and only if every collection
+    of bidder-specific type subsets satisfies Border's union-probability
+    inequality. Weighted feasibility is proved equivalent to conditional
+    feasibility on positive marginal support. Null-type interim values
+    remain unrestricted within [0,1]. For a product of nonnegative normalized
+    distributions, the independent-prior corollary has right side
+    1 minus the product of the complementary marginal probabilities.
+    Full real-valued sufficiency is proved by finite threshold decomposition
+    and compact convex separation; no sufficiency oracle is assumed.
+  authors:
+    - "Arthur Freitas Ramos"
+    - "David Barros Hulak"
+    - "Ruy Jose Guerra Barretto de Queiroz"
+  responsible_maintainers:
+    - "Arthur Freitas Ramos"
+  license: "BSD-3-Clause"
+repository:
+  role: "substantive-development"
+classification:
+  arxiv: ["econ.TH", "cs.GT"]
+  msc2020: ["91B26", "90C05", "03B35"]
+sources:
+  - title: "Reduced Form Auctions Revisited"
+    authors: ["Kim C. Border"]
+    type: "paper"
+    year: 2007
+    doi: "10.1007/s00199-006-0080-z"
+    url: "https://authors.library.caltech.edu/records/4f7kp-cze06"
+    relationship: "formalizes"
+    note: >-
+      The primary Caltech PDF inspected is Social Science Working Paper 1175,
+      September 2003. Its Theorem 7 is the finite correlated-prior criterion;
+      its initial definition restricts conditional equality to positive
+      marginal support. The record identifies the 2007 journal publication.
+      The independent-prior formula is derived using proved product marginals
+      and rectangle factorization. No other theorem of the paper is claimed.
+    author_endorsement: "not-contacted"
+automation:
+  methods:
+    - method: "AI-assisted Lean proof development"
+      system: "OpenAI Codex"
+      role: "Source inspection, proof implementation, compilation, package preparation and kernel replay."
+    - method: "Independent AI mathematical and final source review"
+      system: "OpenAI Codex, separate reviewing agent"
+      role: "Review of sufficiency, null support, independent priors and exact statement fidelity."
+    - method: "Lean tactic automation"
+      role: "simp, fun_prop, field_simp, linarith, ring and finite-sum rewrites; no native_decide."
+review:
+  status: "Machine verification and independent AI review are recorded with exact source hashes in evidence/."
+  human_review: "No human mathematical review or original-author endorsement is claimed."
+  limitations: >-
+    Single-item allocation feasibility with withholding and finite type spaces.
+    No payment, incentive compatibility, deterministic-allocation, infinite-type,
+    symmetric-auction or full-paper formalization claim. The generated Challenge
+    mirrors the library under different helper names, rather than supplying a
+    mathematically independent second proof. No Palomar submission is requested.
+alignment:
+  statements:
+    - lean: "Border.border_feasibility"
+      description: "Full correlated-prior weighted feasibility iff all bidder-specific subset inequalities."
+    - lean: "Border.feasible_iff_conditional"
+      description: "Weighted feasibility iff conditional feasibility only on positive marginal support."
+    - lean: "Border.border_conditional_feasibility"
+      description: "Theorem 7 with conditional interpretation and interim values in [0,1]."
+    - lean: "Border.independent_border_feasibility"
+      description: "Independent product-prior weighted feasibility iff the complement-product inequalities."
+    - lean: "Border.independent_border_conditional_feasibility"
+      description: "The same independent-prior corollary with positive-support conditional feasibility."
+    - lean: "Border.allocation_le_one"
+      description: "Nonnegative allocations with total probability at most one have individual probabilities at most one."

@@ -1,0 +1,9 @@
+.lake/
+__pycache__/
+*.pyc
+evidence/*
+!evidence/verification-manifest.json
+!evidence/final-axioms.log
+!evidence/final-comparator.log
+!evidence/independent-review.md
+!evidence/source-correspondence.md

@@ -1,0 +1,29 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "Border.border_feasibility",
+    "Border.feasible_iff_conditional",
+    "Border.border_conditional_feasibility",
+    "Border.independent_border_feasibility",
+    "Border.independent_border_conditional_feasibility",
+    "Border.allocation_le_one"
+  ],
+  "definition_names": [
+    "Border.IsPrior",
+    "Border.marginal",
+    "Border.interimMass",
+    "Border.IsAllocation",
+    "Border.Feasible",
+    "Border.ConditionallyFeasible",
+    "Border.hitMass",
+    "Border.BorderCondition",
+    "Border.productPrior",
+    "Border.IndependentBorderCondition"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

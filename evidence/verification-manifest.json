@@ -1,0 +1,29 @@
+{
+  "source_files_sha256": {
+    "Audit.lean": "1afe3160f5da780406e6dc151632085e5154933cac1a4ecaa28f0675ce4da02b",
+    "Border/Auction.lean": "0d657217984b13e7789a0fc8b4764e671204c58a56818a7c6d3104774ef64269",
+    "Border/Flow.lean": "986ab83714175bb2dd6361641204876654f36d39a205f61c3c1b060869ecf068",
+    "Border/Independent.lean": "42664808b6de8814156687244a7ff90d4e64bfba583ffa43331dfb4b6c89f959",
+    "Border/Support.lean": "15c2ab22c87f8362fa373dc78cdd4cd0196d5f0096557be82543f4568733158e",
+    "Border/Theorem.lean": "853cb97a2b2648a2c7ed3c16e6dbad9b1739a4351011c9d3307a2e9ac1278658",
+    "Border/WeightedHall.lean": "4c06decf63448537c4d09fc6da57ccd3e764c5384f438d66754218d647c0a8c5",
+    "Border.lean": "dbbfab087a3372f1e1ce10e4fcfbd176e5a8dad5d166c00a57af4e2a6da65a99",
+    "Challenge.lean": "d130b731e672c15c08a77ac74273c86a2d174191e9c1f5f62ea420d8dd8b12f1",
+    "ContractAudit.lean": "fa6bbdb9b238185cfdcd256c80cb39ddab50f3c1f6d37d161d89c36e1d200b23",
+    "Solution.lean": "ba50840699ef7edeea9426cbee343fe30e10a6e1f54da77cf80d4901d6abd40c",
+    "comparator.json": "36a2c4c26760b19b488e623c2cecea19b096fbefc4d4f6d209d13ea68df339f2",
+    "lake-manifest.json": "6dab6dbef446a74dae4b359ab7e27dd521c203037ba17a9099a9a34c8c942422",
+    "lakefile.toml": "ea82637b883ae546537030f7e8de724188f2a3e0c782b44a508b6037e966ce68",
+    "lean-toolchain": "8dc8d6f560141069d9073e370611716ef77ada0da8ffa37e2149f44b2e63ac7a"
+  },
+  "lean": "leanprover/lean4:v4.35.0-rc2",
+  "mathlib": "065356127b1dc0016f66b7283ce0ce2c4055aa55",
+  "comparison": "six theorems and ten genuine definitions; fully proved Challenge",
+  "verification_kernels": [
+    "Lean default",
+    "nanoda",
+    "con-ron"
+  ],
+  "recorded_at_utc": "2026-10-01T19:16:56.700093+00:00",
+  "local_platform": "macOS arm64; Comparator without Linux bubblewrap"
+}
